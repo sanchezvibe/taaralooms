@@ -138,26 +138,26 @@ export default function Dashboard() {
   });
 
   return (
-    <div className="min-h-screen bg-[#f4f4f4] pb-12">
+    <div data-testid="dashboard-container" className="min-h-screen bg-[#f4f4f4] pb-12">
       <Navbar />
       
-      <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 pt-6 lg:pt-10">
+      <main data-testid="dashboard-main" className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 pt-6 lg:pt-10">
         {!isLoaded ? (
-          <div className="space-y-10 animate-pulse">
+          <div data-testid="loading-skeleton" className="space-y-10 animate-pulse">
             {/* Stats Skeleton */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div data-testid="stats-skeleton-grid" className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
               {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="h-32 bg-gray-200 rounded-2xl shadow-sm" />
+                <div key={i} data-testid={`stats-skeleton-card-${i}`} className="h-32 bg-gray-200 rounded-2xl shadow-sm" />
               ))}
             </div>
             
             {/* Action Bar Skeleton */}
-            <div className="h-14 bg-gray-200 rounded-xl max-w-lg" />
+            <div data-testid="action-bar-skeleton" className="h-14 bg-gray-200 rounded-xl max-w-lg" />
 
             {/* Product Table Skeleton */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div data-testid="product-table-skeleton-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[1, 2, 3, 4, 5, 6].map((i) => (
-                <div key={i} className="h-[220px] bg-gray-200 rounded-[1.5rem] shadow-sm" />
+                <div key={i} data-testid={`product-card-skeleton-${i}`} className="h-[220px] bg-gray-200 rounded-[1.5rem] shadow-sm" />
               ))}
             </div>
           </div>

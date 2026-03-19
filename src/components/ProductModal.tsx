@@ -104,36 +104,38 @@ export default function ProductModal({ isOpen, onClose, product, onSave, onDelet
   const profitPercent = makingCostNum > 0 ? ((margin / makingCostNum) * 100).toFixed(0) : "0";
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div data-testid="product-modal-container" className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Dim Overlay */}
       <div 
+        data-testid="modal-overlay"
         className="fixed inset-0 bg-black/50 transition-opacity"
         onClick={onClose}
       />
       
       {/* Modal Content */}
-      <div className="bg-white rounded-[2rem] p-8 md:p-12 w-full max-w-[850px] relative z-10 shadow-2xl overflow-y-auto max-h-[95vh] border border-gray-100">
-        <div className="md:flex md:gap-12 md:items-start text-left">
+      <div data-testid="modal-content" className="bg-white rounded-[2rem] p-8 md:p-12 w-full max-w-[850px] relative z-10 shadow-2xl overflow-y-auto max-h-[95vh] border border-gray-100">
+        <div data-testid="modal-layout" className="md:flex md:gap-12 md:items-start text-left">
           
           {/* Left Column: Thumbnail */}
-          <div className="flex-shrink-0 mb-8 md:mb-0 w-full md:w-[220px]">
-            <label className="block text-sm font-semibold text-gray-800 mb-3 tracking-tight">Thumbnail (9:16)</label>
-            <label className="border border-gray-100 shadow-sm rounded-[1.5rem] aspect-[9/16] w-[140px] md:w-full flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-all relative overflow-hidden group">
+          <div data-testid="thumbnail-upload-column" className="flex-shrink-0 mb-8 md:mb-0 w-full md:w-[220px]">
+            <label data-testid="thumbnail-label" className="block text-sm font-medium text-gray-800 mb-3 tracking-tight">Thumbnail (9:16)</label>
+            <label data-testid="thumbnail-upload-trigger" className="border border-gray-100 shadow-sm rounded-[1.5rem] aspect-[9/16] w-[140px] md:w-full flex flex-col items-center justify-center cursor-pointer hover:bg-gray-50 transition-all relative overflow-hidden group">
               <input 
+                data-testid="thumbnail-input-file"
                 type="file" 
                 accept="image/*"
                 onChange={handleImageUpload}
                 className="hidden" 
               />
               {formData.thumbnail ? (
-                <img src={formData.thumbnail} alt="Preview" className="absolute inset-0 w-full h-full object-cover" />
+                <img data-testid="thumbnail-preview" src={formData.thumbnail} alt="Preview" className="absolute inset-0 w-full h-full object-cover" />
               ) : (
-                <div className="flex items-center justify-center bg-gray-50 rounded-full p-6 text-gray-300">
+                <div data-testid="thumbnail-placeholder" className="flex items-center justify-center bg-gray-50 rounded-full p-6 text-gray-300">
                    <ImagePlus className="w-10 h-10" />
                 </div>
               )}
               {formData.thumbnail && (
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 backdrop-blur-[2px] text-white">
+                <div data-testid="thumbnail-crop-hint" className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 backdrop-blur-[2px] text-white">
                   <Scissors className="w-8 h-8" />
                 </div>
               )}
@@ -141,12 +143,13 @@ export default function ProductModal({ isOpen, onClose, product, onSave, onDelet
           </div>
 
           {/* Right Column: Details */}
-          <div className="flex-grow space-y-8">
+          <div data-testid="product-details-column" className="flex-grow space-y-8">
             
             {/* Model Name */}
-            <div className="space-y-2">
-              <label className="block text-sm font-semibold text-gray-800 leading-none">Model name</label>
+            <div data-testid="input-group-model-name" className="space-y-2">
+              <label data-testid="label-model-name" className="block text-sm font-medium text-gray-800 leading-none">Model name</label>
               <input 
+                data-testid="input-model-name"
                 type="text" 
                 value={formData.modelName}
                 onChange={(e) => setFormData({...formData, modelName: e.target.value})}
@@ -156,21 +159,23 @@ export default function ProductModal({ isOpen, onClose, product, onSave, onDelet
             </div>
 
             {/* Metrics Grid */}
-            <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+            <div data-testid="metrics-grid" className="grid grid-cols-2 gap-x-8 gap-y-6">
               
               {/* Row 1: Cost & Price */}
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-800 leading-none">making cost</label>
+              <div data-testid="input-group-cost" className="space-y-2">
+                <label data-testid="label-making-cost" className="block text-sm font-medium text-gray-800 leading-none">making cost</label>
                 <input 
+                  data-testid="input-making-cost"
                   type="number" 
                   value={formData.makingCost}
                   onChange={(e) => setFormData({...formData, makingCost: e.target.value})}
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-gray-300 font-medium shadow-sm"
                 />
               </div>
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-800 leading-none tracking-tight">Sell price</label>
+              <div data-testid="input-group-price" className="space-y-2">
+                <label data-testid="label-sell-price" className="block text-sm font-medium text-gray-800 leading-none tracking-tight">Sell price</label>
                 <input 
+                  data-testid="input-sell-price"
                   type="number" 
                   value={formData.sellPrice}
                   onChange={(e) => setFormData({...formData, sellPrice: e.target.value})}
@@ -179,32 +184,34 @@ export default function ProductModal({ isOpen, onClose, product, onSave, onDelet
               </div>
 
               {/* Row 2: Margin & Profit */}
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-800 leading-none">margin</label>
-                <div className="w-full border border-gray-100 bg-[#fdf8f8] text-gray-500 rounded-xl px-4 py-3 text-sm font-medium shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]">
+              <div data-testid="input-group-margin" className="space-y-2">
+                <label data-testid="label-margin" className="block text-sm font-medium text-gray-800 leading-none">margin</label>
+                <div data-testid="display-margin" className="w-full border border-gray-100 bg-[#fdf8f8] text-gray-500 rounded-xl px-4 py-3 text-sm font-medium shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]">
                   {margin > 0 ? margin : "0"}
                 </div>
               </div>
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-800 leading-none">profit %</label>
-                <div className="w-full border border-gray-100 bg-[#fdf8f8] text-gray-500 rounded-xl px-4 py-3 text-sm font-medium shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]">
+              <div data-testid="input-group-profit" className="space-y-2">
+                <label data-testid="label-profit" className="block text-sm font-medium text-gray-800 leading-none">profit %</label>
+                <div data-testid="display-profit" className="w-full border border-gray-100 bg-[#fdf8f8] text-gray-500 rounded-xl px-4 py-3 text-sm font-medium shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]">
                   {sellPriceNum > 0 ? `${profitPercent}%` : "0%"}
                 </div>
               </div>
 
               {/* Row 3: Sold & Stock */}
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-800 leading-none">sold</label>
+              <div data-testid="input-group-sold" className="space-y-2">
+                <label data-testid="label-sold" className="block text-sm font-medium text-gray-800 leading-none">sold</label>
                 <input 
+                  data-testid="input-sold"
                   type="number" 
                   value={formData.sold}
                   onChange={(e) => setFormData({...formData, sold: e.target.value})}
                   className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-gray-300 font-medium shadow-sm"
                 />
               </div>
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-gray-800 leading-none">stock</label>
+              <div data-testid="input-group-stock" className="space-y-2">
+                <label data-testid="label-stock" className="block text-sm font-medium text-gray-800 leading-none">stock</label>
                 <input 
+                  data-testid="input-stock"
                   type="number" 
                   value={formData.stock}
                   onChange={(e) => setFormData({...formData, stock: e.target.value})}
@@ -214,8 +221,9 @@ export default function ProductModal({ isOpen, onClose, product, onSave, onDelet
             </div>
 
             {/* Actions */}
-            <div className="pt-8 flex gap-4">
+            <div data-testid="modal-actions-container" className="pt-8 flex gap-4">
                <button 
+                 data-testid="modal-save-button"
                  onClick={() => {
                    onSave({
                      ...formData, 
@@ -229,17 +237,18 @@ export default function ProductModal({ isOpen, onClose, product, onSave, onDelet
                    });
                    onClose();
                  }}
-                 className="flex-1 max-w-[150px] bg-[#5d4d4a] text-white py-3.5 rounded-xl text-md font-bold hover:bg-[#4d3f3d] transition-all shadow-md active:scale-95"
+                 className="flex-1 max-w-[150px] bg-[#5d4d4a] text-white py-3.5 rounded-xl text-md font-semibold hover:bg-[#4d3f3d] transition-all shadow-md active:scale-95"
                >
                  {product ? "Update" : "Save"}
                </button>
                {product && onDelete && (
                  <button
+                   data-testid="modal-delete-button"
                    onClick={() => {
                      setShowDeletePrompt(true);
                      setPasswordAttempt("");
                    }}
-                   className="flex-1 max-w-[150px] border-2 border-[#5d4d4a] text-[#5d4d4a] py-3.5 rounded-xl text-md font-bold hover:bg-gray-50 transition-all active:scale-95"
+                   className="flex-1 max-w-[150px] border-2 border-[#5d4d4a] text-[#5d4d4a] py-3.5 rounded-xl text-md font-semibold hover:bg-gray-50 transition-all active:scale-95"
                  >
                    Delete product
                  </button>
@@ -251,8 +260,8 @@ export default function ProductModal({ isOpen, onClose, product, onSave, onDelet
 
       {/* Image Cropper Modal Layer */}
       {imageToCrop && (
-        <div className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center p-4">
-          <div className="relative w-full max-w-lg aspect-[9/16] bg-black overflow-hidden rounded-2xl shadow-2xl border border-white/10">
+        <div data-testid="cropper-layer" className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center p-4">
+          <div data-testid="cropper-container" className="relative w-full max-w-lg aspect-[9/16] bg-black overflow-hidden rounded-2xl shadow-2xl border border-white/10">
             <Cropper
               image={imageToCrop}
               crop={crop}
@@ -264,24 +273,27 @@ export default function ProductModal({ isOpen, onClose, product, onSave, onDelet
             />
           </div>
           
-          <div className="mt-8 flex items-center gap-4 w-full max-w-lg">
+          <div data-testid="cropper-actions" className="mt-8 flex items-center gap-4 w-full max-w-lg">
              <button 
+               data-testid="cropper-cancel-button"
                onClick={() => setImageToCrop(null)}
-               className="flex-1 bg-white/10 hover:bg-white/20 text-white py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2"
+               className="flex-1 bg-white/10 hover:bg-white/20 text-white py-4 rounded-2xl font-semibold transition-all flex items-center justify-center gap-2"
              >
                <X className="w-5 h-5" /> Cancel
              </button>
              <button 
+               data-testid="cropper-save-button"
                onClick={handleDoneCropping}
-               className="flex-1 bg-white text-black py-4 rounded-2xl font-bold transition-all shadow-xl flex items-center justify-center gap-2 hover:bg-gray-100"
+               className="flex-1 bg-white text-black py-4 rounded-2xl font-semibold transition-all shadow-xl flex items-center justify-center gap-2 hover:bg-gray-100"
              >
                <Check className="w-6 h-6" /> Crop Image
              </button>
           </div>
 
-          <div className="mt-8 flex flex-col items-center w-full max-w-xs space-y-3">
-            <span className="text-white/80 text-sm font-medium tracking-wide text-center">Zoom: {zoom.toFixed(1)}x</span>
+          <div data-testid="cropper-zoom-controls" className="mt-8 flex flex-col items-center w-full max-w-xs space-y-3">
+            <span data-testid="cropper-zoom-label" className="text-white/80 text-sm font-medium tracking-wide text-center">Zoom: {zoom.toFixed(1)}x</span>
             <input
+              data-testid="cropper-zoom-slider"
               type="range"
               value={zoom}
               min={1}
@@ -297,15 +309,16 @@ export default function ProductModal({ isOpen, onClose, product, onSave, onDelet
 
       {/* Delete Password Prompt */}
       {showDeletePrompt && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-          <div className="fixed inset-0 bg-black/40 transition-opacity" onClick={() => setShowDeletePrompt(false)} />
-          <div className="bg-white rounded-[2rem] p-10 relative z-[70] w-full max-w-sm shadow-2xl border border-gray-100 text-center">
-            <div className="mx-auto w-12 h-12 bg-red-50 text-red-500 rounded-full flex items-center justify-center mb-6">
+        <div data-testid="delete-prompt-layer" className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+          <div data-testid="delete-prompt-overlay" className="fixed inset-0 bg-black/40 transition-opacity" onClick={() => setShowDeletePrompt(false)} />
+          <div data-testid="delete-prompt-modal" className="bg-white rounded-[2rem] p-10 relative z-[70] w-full max-w-sm shadow-2xl border border-gray-100 text-center">
+            <div data-testid="delete-prompt-icon" className="mx-auto w-12 h-12 bg-red-50 text-red-500 rounded-full flex items-center justify-center mb-6">
                <X className="w-6 h-6" />
             </div>
-            <h3 className="font-bold text-gray-900 text-xl mb-2">Delete Product</h3>
-            <p className="text-gray-500 text-sm mb-8 leading-relaxed px-4">Enter the admin password to confirm deletion. This cannot be undone.</p>
+            <h3 data-testid="delete-prompt-title" className="font-semibold text-gray-900 text-xl mb-2">Delete Product</h3>
+            <p data-testid="delete-prompt-description" className="text-gray-500 text-sm mb-8 leading-relaxed px-4">Enter the admin password to confirm deletion. This cannot be undone.</p>
             <input 
+              data-testid="delete-password-input"
               type="password"
               value={passwordAttempt}
               onChange={(e) => setPasswordAttempt(e.target.value)}
@@ -319,21 +332,23 @@ export default function ProductModal({ isOpen, onClose, product, onSave, onDelet
                 }
               }}
             />
-            <div className="grid grid-cols-2 gap-3">
+            <div data-testid="delete-prompt-actions" className="grid grid-cols-2 gap-3">
               <button 
+                data-testid="delete-cancel-button"
                 onClick={() => setShowDeletePrompt(false)}
-                className="text-gray-400 font-bold text-sm px-4 py-3 hover:text-gray-600 transition-colors"
+                className="text-gray-400 font-semibold text-sm px-4 py-3 hover:text-gray-600 transition-colors"
               >
                 Cancel
               </button>
               <button 
+                data-testid="delete-confirm-button"
                 onClick={() => {
                   if (passwordAttempt && onDelete && product) {
                     onDelete(product.id, passwordAttempt);
                     setShowDeletePrompt(false);
                   }
                 }}
-                className="bg-red-600 text-white font-bold text-sm px-4 py-3 rounded-xl hover:bg-red-700 transition-all shadow-md active:scale-95"
+                className="bg-red-600 text-white font-semibold text-sm px-4 py-3 rounded-xl hover:bg-red-700 transition-all shadow-md active:scale-95"
               >
                 Confirm Delete
               </button>

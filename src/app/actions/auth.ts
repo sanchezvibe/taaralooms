@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 const USERNAME = process.env.ADMIN_USERNAME || "admin";
-const PASSWORD = process.env.ADMIN_PASSWORD || "admin";
+const PASSWORD = process.env.ADMIN_PASSWORD || "Taara2020@12";
 
 export async function login(formData: FormData) {
   const username = formData.get("username");

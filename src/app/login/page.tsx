@@ -39,9 +39,12 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#f4f4f4] px-4">
-      <div className="w-full max-w-[400px] bg-white p-10 md:p-12 rounded-[1.5rem] shadow-sm text-center">
-        <h1 className="font-great-vibes text-5xl mb-2 text-gray-900">Taaralooms</h1>
-        <p className="text-sm font-semibold text-gray-700 mb-8 tracking-wide">Admin Panel</p>
+      <div className="w-full max-w-[400px] bg-white rounded-[2rem] shadow-sm text-center overflow-hidden flex flex-col">
+        <div className="bg-[#1e1e1e] py-10 px-8 flex justify-center items-center">
+           <img src="/images/logo.png" alt="Taaralooms" className="h-14 w-auto object-contain" />
+        </div>
+        <div className="p-10 md:p-12 pt-8">
+          <p className="text-sm font-medium text-gray-500 mb-8 uppercase tracking-[0.2em] opacity-80">Admin Panel</p>
 
         {error && (
           <div className="mb-4 p-3 bg-red-50 text-red-600 text-sm rounded border border-red-100">
@@ -77,6 +80,7 @@ export default function LoginPage() {
         </form>
       </div>
     </div>
-  );
+  </div>
+);
 }
 

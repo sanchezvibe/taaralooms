@@ -35,20 +35,21 @@ export default function Navbar() {
 
   return (
     <div className="bg-[#1e1e1e] text-white flex items-center justify-between px-6 py-3 relative z-50">
-      <div className="flex items-center gap-2">
-        <h1 className="font-bold tracking-widest text-lg">TAARALOOMS</h1>
-        <div className="w-px h-5 bg-gray-500 mx-2" />
-        <span className="text-gray-300 text-sm hidden sm:inline-block">Admin panel</span>
+      <div className="flex items-center gap-3">
+        <img src="/images/logo.png" alt="Taaralooms" className="h-8 md:h-9 w-auto object-contain" />
+        <div className="w-px h-5 bg-gray-700 mx-2" />
+        <span className="text-gray-400 text-xs uppercase tracking-widest hidden sm:inline-block">Admin panel</span>
       </div>
 
       <div
+        data-testid="navbar-admin-dropdown-trigger"
         ref={dropdownRef}
         className="flex items-center gap-2 relative cursor-pointer pt-2 pb-2"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
-        <div className="flex items-center gap-2">
+        <div data-testid="navbar-admin-info" className="flex items-center gap-2">
           <span className="text-sm font-medium">Admin</span>
-          <div className="bg-white rounded-full p-0.5 w-8 h-8 flex items-center justify-center overflow-hidden">
+          <div data-testid="navbar-admin-avatar-wrapper" className="bg-white rounded-full p-0.5 w-8 h-8 flex items-center justify-center overflow-hidden">
             {/* Admin Profile Image */}
             <img 
               src="/images/admin-profile.jpg" 
@@ -60,7 +61,7 @@ export default function Navbar() {
                 e.currentTarget.parentElement?.classList.add('bg-red-600');
                 if (e.currentTarget.parentElement) {
                   const fallbackSpan = document.createElement('span');
-                  fallbackSpan.className = "text-white font-bold text-xs";
+                  fallbackSpan.className = "text-white font-semibold text-xs";
                   fallbackSpan.innerText = "h";
                   e.currentTarget.parentElement.appendChild(fallbackSpan);
                 }
@@ -72,6 +73,7 @@ export default function Navbar() {
         {/* Click Dropdown */}
         {isDropdownOpen && (
           <div
+            data-testid="navbar-dropdown-menu"
             className="absolute right-0 top-full mt-1 w-40 bg-white rounded-md shadow-lg border border-gray-100 py-1 z-[60]"
             onClick={(e) => e.stopPropagation()}
           >
@@ -92,5 +94,3 @@ export default function Navbar() {
     </div>
   );
 }
-
-

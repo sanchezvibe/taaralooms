@@ -61,7 +61,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             {/* Content Body */}
             <div className="ml-3 flex-1 flex flex-col justify-center gap-0.5">
               <div className="flex items-center justify-between">
-                <span className="text-[15px] font-semibold text-gray-900 tracking-tight">{t.title}</span>
+                <span className="text-[15px] font-medium text-gray-900 tracking-tight">{t.title}</span>
                 <span className="text-[13px] text-gray-400 font-medium">just now</span>
               </div>
               <p className="text-[14px] text-gray-800 leading-snug font-medium">
