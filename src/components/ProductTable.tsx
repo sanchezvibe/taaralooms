@@ -19,9 +19,9 @@ interface ProductTableProps {
 
 export default function ProductTable({ products, onRowClick }: ProductTableProps) {
   return (
-    <div className="p-4 w-full">
+    <div className="py-4 lg:p-4 w-full">
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
         {products.map((product) => (
           <div
             key={product.id}
@@ -56,7 +56,7 @@ export default function ProductTable({ products, onRowClick }: ProductTableProps
               <div className="flex-1"></div>
 
               {/* Bottom Details Row */}
-              <div className="grid grid-cols-4 gap-2 items-end pb-1 md:pb-2">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-x-2 gap-y-4 md:gap-y-0 items-end pb-1 md:pb-2">
                 <div className="flex flex-col">
                   <span className="text-gray-500 font-semibold text-[13px] md:text-sm capitalize mb-0.5">Cost</span>
                   <span className="font-semibold text-gray-800 text-sm md:text-[17px]">₹{product.makingCost}</span>
