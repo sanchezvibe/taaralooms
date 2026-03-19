@@ -38,7 +38,7 @@ export default function StatsOverview({ products }: StatsOverviewProps) {
   
   const totalUnits = totalSold + totalStock;
   
-  const totalExpense = products.reduce((sum, p) => sum + p.makingCost, 0);
+  const totalExpense = products.reduce((sum, p) => sum + (p.makingCost * (p.sold + p.stock)), 0);
   const totalReturns = products.reduce((sum, p) => sum + (p.sellPrice * p.sold), 0);
   const totalProfit = products.reduce((sum, p) => sum + (p.margin * p.sold), 0);
   const stockWorth = products.reduce((sum, p) => sum + (p.sellPrice * p.stock), 0);
