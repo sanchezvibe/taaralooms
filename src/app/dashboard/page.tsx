@@ -142,16 +142,36 @@ export default function Dashboard() {
       <Navbar />
       
       <main className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10 pt-6 lg:pt-10">
-        <StatsOverview products={products} />
+        {!isLoaded ? (
+          <div className="space-y-10 animate-pulse">
+            {/* Stats Skeleton */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="h-32 bg-gray-200 rounded-2xl shadow-sm" />
+              ))}
+            </div>
+            
+            {/* Action Bar Skeleton */}
+            <div className="h-14 bg-gray-200 rounded-xl max-w-lg" />
 
-        
-        <ActionBar 
-          onAddProduct={handleOpenAdd} 
-          searchTerm={searchTerm}
-          onSearchChange={setSearchTerm}
-        />
-        
-        <ProductTable products={filteredProducts} onRowClick={handleOpenEdit} />
+            {/* Product Table Skeleton */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[1, 2, 3, 4, 5, 6].map((i) => (
+                <div key={i} className="h-[220px] bg-gray-200 rounded-[1.5rem] shadow-sm" />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <>
+            <StatsOverview products={products} />
+            <ActionBar 
+              onAddProduct={handleOpenAdd} 
+              searchTerm={searchTerm}
+              onSearchChange={setSearchTerm}
+            />
+            <ProductTable products={filteredProducts} onRowClick={handleOpenEdit} />
+          </>
+        )}
       </main>
 
       <ProductModal 

@@ -19,17 +19,17 @@ interface ProductTableProps {
 
 export default function ProductTable({ products, onRowClick }: ProductTableProps) {
   return (
-    <div className="bg-white rounded-xl p-4 md:p-8 w-full shadow-sm">
-      
+    <div className="p-4 w-full">
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {products.map((product) => (
-          <div 
+          <div
             key={product.id}
             onClick={() => onRowClick(product)}
             className="flex flex-row p-4 bg-white rounded-[1.5rem] hover:bg-gray-50 cursor-pointer transition-colors shadow-sm border border-gray-100 gap-5"
           >
             {/* Left: Thumbnail */}
-            <div className="shrink-0 w-[120px] md:w-[140px] h-[180px] md:h-[200px] overflow-hidden rounded-[1rem] bg-[#d89694] shadow-sm flex items-center justify-center">
+            <div className="shrink-0 w-[120px] md:w-[140px] aspect-[9/16] overflow-hidden rounded-[1rem] bg-[#d89694] shadow-sm flex items-center justify-center">
               {product.thumbnail && product.thumbnail !== "h" ? (
                 <img src={product.thumbnail} alt={product.modelName} className="w-full h-full object-cover" />
               ) : (
@@ -57,22 +57,22 @@ export default function ProductTable({ products, onRowClick }: ProductTableProps
 
               {/* Bottom Details Row */}
               <div className="grid grid-cols-4 gap-2 items-end pb-1 md:pb-2">
-                 <div className="flex flex-col">
-                   <span className="text-gray-500 font-semibold text-[13px] md:text-sm capitalize mb-0.5">Cost</span>
-                   <span className="font-bold text-gray-800 text-sm md:text-[17px]">₹{product.makingCost}</span>
-                 </div>
-                 <div className="flex flex-col">
-                   <span className="text-gray-500 font-semibold text-[13px] md:text-sm capitalize mb-0.5">margin</span>
-                   <span className="font-bold text-gray-800 text-sm md:text-[17px]">₹{product.margin}</span>
-                 </div>
-                 <div className="flex flex-col">
-                   <span className="text-gray-500 font-semibold text-[13px] md:text-sm capitalize mb-0.5">profit</span>
-                   <span className="font-bold text-[#628b25] text-sm md:text-[17px]">{product.profitPercent}%</span>
-                 </div>
-                 <div className="flex flex-col">
-                   <span className="text-gray-500 font-semibold text-[13px] md:text-sm capitalize mb-0.5">sold</span>
-                   <span className="font-bold text-gray-800 text-sm md:text-[17px]">{product.sold}</span>
-                 </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-500 font-semibold text-[13px] md:text-sm capitalize mb-0.5">Cost</span>
+                  <span className="font-semibold text-gray-800 text-sm md:text-[17px]">₹{product.makingCost}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-500 font-semibold text-[13px] md:text-sm capitalize mb-0.5">margin</span>
+                  <span className="font-semibold text-gray-800 text-sm md:text-[17px]">₹{product.margin}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-500 font-semibold text-[13px] md:text-sm capitalize mb-0.5">profit</span>
+                  <span className="font-semibold text-[#628b25] text-sm md:text-[17px]">{product.profitPercent}%</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-gray-500 font-semibold text-[13px] md:text-sm capitalize mb-0.5">sold</span>
+                  <span className="font-semibold text-gray-800 text-sm md:text-[17px]">{product.sold}</span>
+                </div>
               </div>
             </div>
           </div>
