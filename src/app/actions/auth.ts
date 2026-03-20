@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 const USERNAME = process.env.ADMIN_USERNAME || "admin";
-const PASSWORD = process.env.ADMIN_PASSWORD || "Taara2020@12";
+const PASSWORD = process.env.ADMIN_PASSWORD || "9090";
 
 export async function login(formData: FormData) {
   const username = formData.get("username");
@@ -19,10 +19,10 @@ export async function login(formData: FormData) {
       maxAge: 60 * 60 * 24, // 1 day
       path: "/",
     });
-    
+
     return { success: true };
   }
-  
+
   return { success: false, error: "Invalid username or password" };
 }
 
